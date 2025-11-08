@@ -2,8 +2,10 @@
 <html lang="am">
 <head>
     <meta charset="UTF-8">
-    <title>Countdown for Omar & Zeyneb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ✅ Responsive meta tag -->
+    <title>ዑመር & ዘይነብ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -19,6 +21,7 @@
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
             color: white;
+            text-align: center;
         }
 
         @keyframes gradientMove {
@@ -28,14 +31,16 @@
         }
 
         .countdown-container {
-            background: rgba(255, 255, 255, 0.15);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 192, 203, 0.15));
+            border: 2px solid rgba(255, 255, 255, 0.3);
             padding: 50px 60px;
-            border-radius: 25px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-            text-align: center;
+            border-radius: 30px;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 2;
+            max-width: 500px;
+            width: 90%;
         }
 
         .names {
@@ -46,21 +51,21 @@
         }
 
         .and-text {
-            font-size: 48px;
+            font-size: 50px;
             font-weight: 600;
-            color: #f8e1ff;
+            color: #ffdefb;
             margin: 10px 0;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
             animation: glow 3s ease-in-out infinite alternate;
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px #d79aff, 0 0 30px #d79aff; }
-            to { text-shadow: 0 0 20px #fff, 0 0 40px #f3b0ff, 0 0 60px #f3b0ff; }
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #f3b0ff, 0 0 30px #f3b0ff; }
+            to { text-shadow: 0 0 25px #fff, 0 0 45px #ffd6ff, 0 0 70px #ffd6ff; }
         }
 
         .countdown {
-            font-size: 30px;
+            font-size: 28px;
             font-weight: bold;
             color: #fff;
             margin-top: 25px;
@@ -81,13 +86,13 @@
 
         .circle-bg {
             fill: none;
-            stroke: rgba(255,255,255,0.2);
+            stroke: rgba(255,255,255,0.25);
             stroke-width: 10;
         }
 
         .circle-progress {
             fill: none;
-            stroke: #fff;
+            stroke: #ffffff;
             stroke-width: 10;
             stroke-linecap: round;
             transition: stroke-dashoffset 0.5s ease;
@@ -103,6 +108,7 @@
             color: #fff;
         }
 
+        /* Emoji Rain */
         .emoji-rain {
             position: absolute;
             width: 100%;
@@ -123,6 +129,26 @@
         @keyframes fall {
             0% { transform: translateY(-100px) rotate(0deg); }
             100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .names {
+                font-size: 40px;
+            }
+            .and-text {
+                font-size: 36px;
+            }
+            .countdown {
+                font-size: 22px;
+            }
+            .seconds-circle {
+                width: 130px;
+                height: 130px;
+            }
+            .seconds-text {
+                font-size: 32px;
+            }
         }
     </style>
 </head>
@@ -151,8 +177,7 @@
     const secondsText = document.getElementById('secondsText');
     const circle = document.querySelector('.circle-progress');
     const secondsCircle = document.getElementById('secondsCircle');
-    const container = document.getElementById('countdownContainer');
-    const targetDate = new Date("December 7, 2025 09:30:00").getTime(); // ✅ Updated date/time
+    const targetDate = new Date("December 7, 2025 09:30:00").getTime(); // ✅ Date & Time
     const circleLength = 440;
 
     function updateCountdown() {
@@ -161,7 +186,7 @@
 
         if (distance < 0) {
             countdownEl.innerHTML = "🎉 ባረከሏሁ ለኩማ ወባረከ ዐለይኩማ ወጀመዐ በይነኩማ ፊል ኸይር 🎉";
-            secondsCircle.style.display = "none"; // remove the circle
+            secondsCircle.style.display = "none";
             clearInterval(interval);
             return;
         }
